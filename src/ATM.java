@@ -15,7 +15,7 @@ public class ATM {
     public static final String WHITE_BACK = "\u001B[47m";
     public static final String RED = "\\u001B[31m";
     public static final String GREEN_BACK = "\\u001B[42m";
-    public static final String WHITE = "\\u001B[37m";
+
     Scanner scan = new Scanner(System.in);
 
     public ATM(){}
@@ -90,13 +90,13 @@ public class ATM {
         System.out.println();
         System.out.println("Welcome to the " + GREEN + "A" + RESET + "utomated " + GREEN + "T" + RESET + "eller " + GREEN +"M" + RESET + "achine");
 
-        System.out.println(WHITE_BACK + "Loading" + RESET);
+        System.out.print(WHITE_BACK + "Loading" + RESET);
         System.out.print(WHITE_BACK + "." + RESET);
         System.out.print(WHITE_BACK + "." + RESET);
-        System.out.print(WHITE_BACK + "." + RESET);
+        System.out.println(WHITE_BACK + "." + RESET);
 
         // Create account screen
-        System.out.println(GREEN + "Create An Account");
+        System.out.println(GREEN + "Create An Account" + RESET);
         System.out.println("Enter your name: ");
         String name = scan.nextLine();
         System.out.println("Create a 4 digit PIN: ");
@@ -108,17 +108,19 @@ public class ATM {
         savings = new Account("Savings Account", customer);
         checking = new Account("Checking Account", customer);
 
-        System.out.println(GREEN_BACK + "Account created!");
+        System.out.println(GREEN_BACK + "Account created!" + RESET);
 
-        System.out.println(WHITE_BACK + "Loading");
+        System.out.print(WHITE_BACK + "Loading");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
+        System.out.println(WHITE_BACK + ". " + RESET);
 
     }
-    private void atm(){
+    private boolean atm(){
+        //Tracker varaible
+        boolean choice = true;
         //PIN input
-        System.out.println(GREEN + "Sign in");
+        System.out.println(GREEN + "Sign in" + RESET);
         boolean incorrect = true;
         while (incorrect) {
             System.out.println("Please enter your 4 digit PIN: ");
@@ -129,7 +131,7 @@ public class ATM {
             }else {
                 System.out.println("Your PIN is incorrect, Please try again.");
 
-                System.out.println(GREEN + "Sign in");
+                System.out.println(GREEN + "Sign in" + RESET);
             }
         }
 
@@ -150,15 +152,14 @@ public class ATM {
                     "6. Exit\n");
             selection = scan.nextInt();
             scan.nextLine();
-            System.out.println();
 
 
             if (selection > 6 || selection < 1){
-                System.out.println(RED + "Invalid input; Please make a valid selection");
-//                System.out.println("Welcome " + GREEN + customer.getName() + RESET +  "!");
-//                System.out.println();
-//                System.out.println("Main Menu");
-//                System.out.println("Please make a selection: ");
+                System.out.println(RED + "Invalid input" + RESET + "; Please make a valid selection");
+                System.out.println("Welcome " + GREEN + customer.getName() + RESET +  "!");
+                System.out.println();
+                System.out.println("Main Menu");
+                System.out.println("Please make a selection: ");
             }else {
                 validInput = true;
             }
@@ -176,21 +177,18 @@ public class ATM {
         }else if (selection == 5){
             changePIN();
         }else {
-            System.out.println("Thanks for visiting!");
-            System.out.println(WHITE_BACK + "Signing out");
-            System.out.print(WHITE_BACK + ". ");
-            System.out.print(WHITE_BACK + ". ");
-            System.out.print(WHITE_BACK + ". ");
+            choice = false;
         }
+        return choice;
     }
 
     private void withdraw(){
-        System.out.println(WHITE_BACK + "Loading");
+        System.out.print(WHITE_BACK + "Loading");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ".");
+        System.out.println(WHITE_BACK + "." + RESET);
 
-        System.out.println(GREEN + "Withdraw Money");
+        System.out.println(GREEN + "Withdraw Money" + RESET);
         System.out.println();
 
         //Choosing account
@@ -199,11 +197,11 @@ public class ATM {
         scan.nextLine();
 
         if (account == 1){
-            System.out.println(GREEN + savings.getName());
+            System.out.println(GREEN + savings.getName() + RESET);
         }else {
-            System.out.println(GREEN + checking.getName());
+            System.out.println(GREEN + checking.getName() + RESET);
         }
-        System.out.println(RED + "Machine can only dispense $20 and $5 bills");
+        System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
 
         //Checking for valid input
         boolean validInput = false;
@@ -212,40 +210,40 @@ public class ATM {
             System.out.println("How much would you like to withdraw?: ");
             amount = scan.nextInt();
             scan.nextLine();
-            if (amount % 5 != 0){
+            if (amount % 5 != 0 && amount != 0){
                 System.out.println("Sorry :(, machine cannot dispense that amount; Please enter a valid amount");
 
-                System.out.println(GREEN + "Withdraw Money");
+                System.out.println(GREEN + "Withdraw Money" + RESET);
                 System.out.println();
-                System.out.println(RED + "Machine can only dispense $20 and $5 bills");
+                System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
             }else {
                 if (account == 1){
                     if (savings.getBalance() < amount){
                         System.out.println(RED + "Insufficient funds" + RESET + "; Please choose a smaller amount");
 
-                        System.out.println(GREEN + "Withdraw Money");
-                        System.out.println();
+                        System.out.print(GREEN + "Withdraw Money :" + RESET);
                         if (account == 1){
-                            System.out.println(GREEN + savings.getName());
+                            System.out.println(GREEN + savings.getName() + RESET);
                         }else {
-                            System.out.println(GREEN + checking.getName());
+                            System.out.println(GREEN + checking.getName() + RESET);
                         }
-                        System.out.println(RED + "Machine can only dispense $20 and $5 bills");
+                        System.out.println();
+                        System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
                     }else {
                         validInput = true;
                     }
                 }else {
                     if (checking.getBalance() < amount) {
-                        System.out.println(RED + "Insufficient funds" + RESET + "; Please choose a smaller amount");
+                        System.out.println(RED + "Insufficient funds" + RESET + "; Please choose a smaller amount" + RESET);
 
-                        System.out.println(GREEN + "Withdraw Money");
+                        System.out.println(GREEN + "Withdraw Money" + RESET);
                         System.out.println();
                         if (account == 1){
-                            System.out.println(GREEN + savings.getName());
+                            System.out.println(GREEN + savings.getName() + RESET);
                         }else {
-                            System.out.println(GREEN + checking.getName());
+                            System.out.println(GREEN + checking.getName() + RESET);
                         }
-                        System.out.println(RED + "Machine can only dispense $20 and $5 bills");
+                        System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
                     }else {
                         validInput = true;
                     }
@@ -266,7 +264,7 @@ public class ATM {
         validInput = false;
 
         //Checking if selection adds up
-        while (!validInput){
+        while (!validInput) {
             System.out.println("Max $20 bills: " + RED + max[0] + RESET + "\nMax $5 bills: " + RED + max[1]);
             System.out.println("How many $20 bills do you want?");
             int twentys = scan.nextInt();
@@ -276,25 +274,27 @@ public class ATM {
             scan.nextLine();
             int total = (twentys * 20) + (fives * 5);
 
-            if (total == amount && twentys <= max[0] && fives <= max[1]){
+            if (total == amount && twentys <= max[0] && fives <= max[1]) {
                 validInput = true;
-            }else{
-                if (total != amount){
+            } else {
+                if (total != amount) {
                     System.out.println(RED + "Invalid input" + RESET + ";Please enter an amount of bills that adds up to withdraw amount");
-                }else if (twentys > max[0] || fives > max[1]){
-                    System.out.println(RED + "Invalid input" + RESET + ";Please enter an amount of bills less than or equal to the maximum amount of bills");
                 }
+//                }else if (twentys > max[0] || fives > max[1]){
+//                    System.out.println(RED + "Invalid input" + RESET + ";Please enter an amount of bills less than or equal to the maximum amount of bills");
+//                }
 
             }
-            System.out.println(WHITE_BACK + "Dispensing cash");
+        }
+            System.out.print(WHITE_BACK + "Dispensing cash");
             System.out.print(WHITE_BACK + ". ");
             System.out.print(WHITE_BACK + ". ");
-            System.out.print(WHITE_BACK + ".");
+            System.out.println(WHITE_BACK + "." + RESET);
 
 
             //Receipt
-            System.out.println(WHITE + "-----------------------------");
-            System.out.println(WHITE_BACK + "Transaction" + getTransactionID());
+            System.out.println("-----------------------------" + RESET);
+            System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
             System.out.println(WHITE_BACK + "Withdraw");
             System.out.print(WHITE_BACK + "From: ");
             if (account == 1){
@@ -308,23 +308,22 @@ public class ATM {
             System.out.println(WHITE_BACK + "-----------------------------");
             System.out.println(WHITE_BACK + "Current Balances");
             System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-            System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance());
-            System.out.println(WHITE + "⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄");
+            System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
+            System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
 
-        }
     }
 
     private void deposit(){
-        System.out.println(WHITE_BACK + "Loading");
+        System.out.print(WHITE_BACK + "Loading");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
+        System.out.println(WHITE_BACK + ". " + RESET);
 
-        System.out.println(GREEN + "Deposit Money");
+        System.out.println(GREEN + "Deposit Money" + RESET);
         System.out.println();
 
         //Choosing account
-        System.out.println("Which account would you like to withdraw from? \n1. Savings \n2. Checking");
+        System.out.println("Which account would you like to deposit to? \n1. Savings \n2. Checking");
         int account = scan.nextInt();
         scan.nextLine();
 
@@ -343,8 +342,8 @@ public class ATM {
         }
 
         //Receipt
-        System.out.println(WHITE + "-----------------------------");
-        System.out.println(WHITE_BACK + "Transaction" + getTransactionID());
+        System.out.println("-----------------------------" + RESET);
+        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
         System.out.println(WHITE_BACK + "Deposit");
         System.out.print(WHITE_BACK + "From: ");
         if (account == 1){
@@ -358,21 +357,23 @@ public class ATM {
         System.out.println(WHITE_BACK + "-----------------------------");
         System.out.println(WHITE_BACK + "Current Balances");
         System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance());
-        System.out.println(WHITE + "⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄");
+        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
     }
 
     private void transfer(){
-        System.out.println(WHITE_BACK + "Loading");
+        System.out.print(WHITE_BACK + "Loading");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". " + RESET);
+        System.out.println(WHITE_BACK + ". " + RESET);
 
-        System.out.println(GREEN + "Transfer Money");
+        System.out.println(GREEN + "Transfer Money" + RESET);
         System.out.println();
 
         //Choosing accounts
         System.out.println("Which account would you like to transfer funds from?");
+        System.out.println("1. Savings");
+        System.out.println("2. Checking");
         int account = scan.nextInt();
         scan.nextLine();
 
@@ -389,7 +390,7 @@ public class ATM {
                 }else {
                     System.out.println(RED + "Insufficient funds for transfer" + RESET + "; Please enter an amount less than or equal to your accounts balance");
 
-                    System.out.println(GREEN + "Transfer Money");
+                    System.out.println(GREEN + "Transfer Money" + RESET);
                     System.out.println();
                 }
             }else{
@@ -398,7 +399,7 @@ public class ATM {
                 }else {
                     System.out.println(RED + "Insufficient funds for transfer" + RESET + "; Please enter an amount less than or equal to your accounts balance");
 
-                    System.out.println(GREEN + "Transfer Money");
+                    System.out.println(GREEN + "Transfer Money" + RESET);
                     System.out.println();
                 }
             }
@@ -413,8 +414,9 @@ public class ATM {
             savings.deposit(amount);
         }
 
-        System.out.println(WHITE + "-----------------------------");
-        System.out.println(WHITE_BACK + "Transaction" + getTransactionID());
+        // Receipt
+        System.out.println("-----------------------------" + RESET);
+        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
         System.out.println(WHITE_BACK + "Transfer");
         System.out.print(WHITE_BACK + "From: ");
         if (account == 1){
@@ -422,6 +424,7 @@ public class ATM {
         }else {
             System.out.print("Checking");
         }
+        System.out.println();
         System.out.print(WHITE_BACK + "To: ");
         if (account == 1){
             System.out.print("Checking");
@@ -434,34 +437,52 @@ public class ATM {
         System.out.println(WHITE_BACK + "-----------------------------");
         System.out.println(WHITE_BACK + "Current Balances");
         System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance());
-        System.out.println(WHITE + "⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄");
+        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
     }
 
     private void getBalances(){
-        System.out.println(WHITE_BACK + "Loading");
+        System.out.print(WHITE_BACK + "Loading");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
+        System.out.println(WHITE_BACK + ". " + RESET);
 
 
-        System.out.println(GREEN + "Account Balances");
-        System.out.println("Savings Account: $" + savings.getBalance());
-        System.out.println("Checking Account: $" + checking.getBalance());
+        // Receipt
+        System.out.println("-----------------------------" + RESET);
+        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
+        System.out.println(WHITE_BACK + "Account Balances");
+        System.out.println(WHITE_BACK + "-----------------------------");
+        System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
+        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
+
+
     }
 
     private void changePIN(){
-        System.out.println(WHITE_BACK + "Loading");
+        System.out.print(WHITE_BACK + "Loading");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
+        System.out.println(WHITE_BACK + ". " + RESET);
 
 
-        System.out.println(GREEN + "Change PIN");
+        System.out.println(GREEN + "Change PIN" + RESET);
         System.out.println("Please enter a new 4 digit PIN");
         int newPIN = scan.nextInt();
         scan.nextLine();
         customer.setPIN(newPIN);
+
+        // Receipt
+        System.out.println("-----------------------------" + RESET);
+        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
+        System.out.println(WHITE_BACK + "Change PIN");
+        System.out.println(WHITE_BACK + "PIN successfully changed!");
+        System.out.println(WHITE_BACK + "-----------------------------");
+        System.out.println(WHITE_BACK + "Current Balances");
+        System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
+        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
 
     }
 
@@ -493,15 +514,20 @@ public class ATM {
 
     public void start(){
         welcome();
-        int choice = 1;
-        while (choice == 1){
-            atm();
-            System.out.println("Would you like to complete another action? Yes(1)/ No(2)");
-            choice = scan.nextInt();
-            scan.nextLine();
+        boolean choice = true;
+        while (choice){
+            choice = atm();
+            if (choice){
+                System.out.println("Would you like to complete another action? Yes(1)/ No(2)");
+                int answer = scan.nextInt();
+                scan.nextLine();
+                if (answer == 2){
+                    choice = false;
+                }
+            }
         }
         System.out.println("Thanks for visiting!");
-        System.out.println(WHITE_BACK + "Signing out");
+        System.out.print(WHITE_BACK + "Signing out");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
         System.out.print(WHITE_BACK + ". ");
