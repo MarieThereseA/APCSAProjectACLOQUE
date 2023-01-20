@@ -10,11 +10,11 @@ public class ATM {
     private Account savings;
     private Account checking;
     private int transactionID = 999;
-    public static final String RESET = "\u001B[0m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String WHITE_BACK = "\u001B[47m";
-    public static final String RED = "\\u001B[31m";
-    public static final String GREEN_BACK = "\\u001B[42m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_WHITE_BACK = "\u001B[47m";
+    public static final String ANSI_RED = "\\u001B[31m";
+    public static final String ANSI_GREEN_BACK = "\\u001B[42m";
 
     Scanner scan = new Scanner(System.in);
 
@@ -24,79 +24,21 @@ public class ATM {
 
     private void welcome(){
         // Welcome Screen
-//        System.out.println(GREEN + "  ▒▒░░░░  ▒▒▒▒▒▒░░▒▒▒▒▒▒░░        ░░▒▒░░          ▒▒░░  ▒▒▒▒░░      ░░      ░░▒▒░░▒▒░░▒▒▒▒░░  ▒▒░░▒▒  ▒▒▒▒░░▒▒▒▒  ░░▒▒  ▒▒▓▓▓▓░░  ░░▒▒▒▒▒▒░░▒▒▒▒░░░░  ████▓▓▓▓▒▒  ░░░░  ▒▒▒▒  ░░░░\n" +
-//                "░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▓▓▒▒▒▒░░      ░░        ▒▒░░▒▒░░▒▒▒▒░░    ░░░░  ▒▒▒▒░░  ░░▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒  ▒▒▓▓░░░░  ░░░░        ░░░░  ░░░░    ░░░░▒▒░░  ▓▓▓▓▓▓▓▓▒▒  ░░░░  ▒▒░░  ░░▒▒\n" +
-//                "  ░░▒▒░░░░▒▒▒▒░░  ░░░░▒▒░░▒▒▒▒▒▒▒▒▒▒░░░░░░      ░░▒▒▒▒▒▒  ▒▒▒▒░░░░  ░░  ▒▒▒▒  ░░▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░  ▓▓▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ░░░░  ░░░░  ▒▒░░░░▓▓▓▓▓▓▓▓░░  ░░░░  ▒▒▒▒░░░░░░\n" +
-//                "░░░░▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒░░▒▒░░▒▒▒▒░░  ░░░░▒▒  ░░░░░░      ░░░░░░▒▒░░▒▒░░▒▒░░  ██▓▓▒▒▒▒▒▒░░▒▒▒▒░░▒▒▒▒░░░░▒▒▓▓▓▓▒▒  ▒▒░░░░▓▓▓▓▓▓▓▓░░  ░░░░░░▒▒▒▒  ▒▒▒▒\n" +
-//                "░░░░▒▒  ▒▒▒▒░░▒▒░░░░▒▒▒▒▓▓▒▒░░░░▒▒▒▒▒▒▒▒░░▒▒▒▒  ▒▒▒▒▒▒░░    ░░░░  ░░░░░░  ▒▒░░░░      ░░░░    ░░░░░░▒▒▒▒▒▒  ░░▓▓░░  ▒▒▒▒░░▒▒░░▒▒▒▒░░░░▓▓▓▓▓▓▒▒  ▒▒░░░░▓▓▓▓▓▓▓▓░░  ░░░░░░░░░░  ▒▒▒▒\n" +
-//                "░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░  ▒▒░░░░░░░░░░░░░░          ░░░░░░  ░░░░░░░░░░▒▒░░    ░░░░    ░░      ░░▒▒▒▒░░▒▒  ░░▓▓▒▒░░▒▒▒▒▒▒░░▒▒░░░░  ▓▓▓▓▓▓▒▒░░▒▒░░░░▓▓▓▓▓▓▓▓░░  ░░  ░░░░░░  ░░▒▒\n" +
-//                "░░░░  ▒▒▒▒░░▒▒░░▒▒░░░░              ░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░  ▒▒░░░░░░▒▒▒▒░░  ░░░░        ░░        ░░▒▒▒▒▒▒▒▒  ▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒  ▓▓▓▓██▒▒░░▒▒░░░░▓▓▓▓▓▓▓▓░░      ░░░░░░  ░░▒▒\n" +
-//                "░░    ▒▒░░░░░░        ░░░░        ▒▒▒▒▒▒▒▒▒▒▒▒░░░░    ░░    ▒▒░░  ░░░░░░            ░░  ░░            ░░▒▒▒▒▒▒░░  ▒▒▒▒  ▒▒▒▒░░░░▒▒▒▒  ▓▓▓▓▓▓▒▒  ░░░░░░▓▓▓▓▓▓▓▓░░░░░░░░  ░░░░░░▒▒▒▒\n" +
-//                "  ▒▒  ▒▒  ░░░░    ░░    ░░        ▒▒░░▒▒▒▒▒▒▒▒░░  ▒▒▒▒░░░░░░░░  ▒▒░░░░      ░░    ░░░░░░                ▒▒▒▒▒▒▒▒░░  ▓▓▒▒░░▒▒▒▒▒▒▒▒▒▒  ██▓▓▓▓░░░░░░░░░░████▓▓▓▓░░░░░░░░  ░░░░  ▒▒▓▓\n" +
-//                "▒▒░░░░▒▒  ▒▒░░  ░░░░              ░░▒▒▒▒░░▒▒▒▒▒▒  ░░  ░░▒▒░░  ░░▒▒░░    ░░    ░░░░░░▒▒▒▒░░░░      ░░    ▒▒  ▒▒▒▒▒▒  ░░▓▓░░░░▒▒▒▒▒▒▒▒  ██▓▓▓▓▒▒  ▒▒  ░░▓▓▓▓▓▓▓▓░░  ░░░░  ░░▓▓  ▒▒▒▒\n" +
-//                "░░  ░░▒▒░░▒▒░░  ░░  ░░            ░░░░▒▒  ▒▒░░▒▒░░  ░░░░░░░░▒▒░░░░    ░░    ░░░░░░▒▒░░░░▒▒░░░░          ▒▒▒▒░░▒▒▒▒▒▒  ▓▓▓▓░░▒▒▒▒░░░░  ████▓▓▒▒  ░░  ▒▒▓▓▓▓▓▓▓▓▓▓░░  ░░░░░░░░  ▒▒▒▒\n" +
-//                "░░  ▒▒░░░░▒▒        ░░░░░░░░░░    ░░░░▒▒░░▒▒▒▒░░  ░░▒▒  ▒▒░░░░  ░░░░          ░░▒▒░░░░▒▒▒▒░░  ░░    ░░  ░░▒▒▒▒░░▒▒  ▓▓▓▓▓▓▒▒░░░░▒▒▒▒  ▒▒████▓▓░░▒▒  ▒▒▓▓▓▓▓▓▓▓▒▒▒▒▒▒    ░░▒▒  ▒▒░░\n" +
-//                "  ░░░░  ░░░░    ░░  ░░▒▒░░░░▒▒░░░░  ░░▒▒  ░░  ░░░░░░  ▒▒░░░░  ░░▒▒░░░░        ░░░░▒▒░░░░▒▒                ░░░░░░░░▓▓▓▓▓▓▓▓▓▓▓▓░░▒▒▒▒░░▒▒████▓▓░░░░░░▒▒▓▓▓▓▓▓▓▓▒▒░░▒▒▒▒░░    ░░▒▒▒▒\n" +
-//                "░░░░░░▒▒▒▒░░  ░░░░    ░░░░░░░░      ▒▒▒▒▒▒  ░░░░░░░░░░▒▒░░  ░░▒▒▒▒▒▒░░          ░░░░▒▒▒▒░░    ░░░░    ░░░░▒▒░░▒▒██▓▓▓▓▓▓▓▓▓▓░░▒▒▒▒▒▒░░░░██████░░░░  ▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░▒▒▒▒    ░░▒▒\n" +
-//                "  ░░░░▒▒▒▒        ░░          ░░▒▒  ▒▒░░  ░░░░░░░░▓▓▒▒    ▓▓▒▒░░▒▒▓▓▓▓▒▒░░      ░░░░        ░░░░  ░░░░▒▒▒▒░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░  ░░▒▒▒▒▒▒  ▓▓████▒▒░░░░▒▒▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░░░▒▒░░    \n" +
-//                "  ░░░░░░▒▒    ░░  ░░  ░░▒▒▒▒▒▒░░▒▒  ░░  ░░░░  ░░░░░░  ░░▓▓░░░░░░░░░░▒▒▓▓▒▒░░              ░░░░  ░░░░▒▒▒▒  ▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░      ▒▒▒▒▒▒  ▓▓████▓▓▒▒░░▒▒▓▓▓▓▓▓▓▓▒▒  ░░▒▒▒▒▒▒▒▒▒▒▒▒  \n" +
-//                "░░▒▒  ▒▒░░          ░░░░▒▒░░▒▒▒▒▒▒  ░░░░░░  ░░▒▒░░  ░░▒▒▒▒░░░░░░░░░░▒▒▒▒▓▓▒▒░░          ░░░░  ░░░░▒▒▒▒░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒        ░░░░▒▒▒▒  ▓▓▓▓██▓▓▒▒░░▒▒▓▓▓▓▓▓▓▓▒▒▒▒░░  ▒▒▒▒░░▒▒▒▒▒▒\n" +
-//                "░░▒▒░░░░    ░░░░        ▒▒▒▒▒▒    ░░▒▒░░░░▒▒▒▒░░  ▒▒▒▒▒▒░░░░▒▒▒▒░░░░░░▓▓▓▓▓▓░░      ░░░░  ░░░░▒▒▒▒░░░░▓▓▓▓▓▓▓▓▓▓▓▓░░    ▒▒  ▒▒▒▒░░▒▒▒▒  ██▓▓▓▓▓▓▓▓░░▒▒▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░  ▒▒░░▒▒▒▒░░\n" +
-//                "▒▒░░░░▒▒                ▒▒▒▒▒▒  ░░▒▒░░░░▒▒▒▒░░    ░░░░▒▒▒▒▒▒░░▒▒░░░░░░▒▒▓▓▓▓▓▓▒▒░░  ░░  ░░▒▒▒▒▒▒░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░  ░░  ░░▒▒▒▒▒▒▒▒  ▓▓▓▓▓▓▓▓▓▓▒▒▒▒▓▓▓▓▓▓▓▓▒▒▒▒░░▒▒▒▒▓▓░░▒▒░░  \n" +
-//                "░░░░▒▒░░                ▒▒░░  ▒▒▒▒░░░░░░░░░░░░░░      ▒▒▓▓▒▒▒▒▒▒▒▒░░░░▒▒▓▓▓▓▓▓░░▒▒▒▒▒▒▒▒░░▒▒▒▒  ▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░  ░░        ░░▒▒░░▒▒▒▒  ▓▓▓▓▓▓▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒  ▒▒\n" +
-//                "░░░░░░  ░░░░░░        ░░    ▒▒▒▒  ░░▒▒░░  ░░░░        ░░▓▓▒▒▓▓▒▒▓▓▒▒▓▓  ▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░░░▒▒░░██▓▓▓▓▓▓██▓▓▒▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▒  ▒▒▓▓▓▓▒▒▓▓▓▓██▓▓▓▓▓▓▓▓░░░░░░▒▒▒▒▒▒▒▒  ▒▒▓▓\n" +
-//                "░░░░▒▒░░        ░░▒▒▒▒░░░░▒▒░░  ░░░░░░  ░░░░            ▓▓▓▓▓▓▓▓▒▒▒▒▓▓░░░░░░▒▒▒▒▒▒▓▓░░░░░░░░██▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░▒▒▓▓▓▓▓▓▓▓  ▓▓██▓▓▓▓▓▓▓▓    ░░▒▒▒▒▒▒░░  ▓▓▓▓\n" +
-//                "░░░░    ░░░░▒▒▒▒▒▒▒▒  ░░▒▒░░░░▒▒▒▒░░░░░░                ░░▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░▒▒▒▒▒▒▒▒░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░    ░░░░▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ░░████▓▓▓▓▒▒░░░░░░░░▒▒▒▒  ▓▓▓▓▓▓\n" +
-//                "  ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒░░░░░░░░░░░░░░                    ▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░  ██████▓▓▓▓▒▒░░  ▒▒▒▒  ▒▒▓▓▓▓▓▓\n" +
-//                "▒▒░░▒▒▒▒░░▒▒▒▒░░  ▒▒▒▒▒▒░░░░      ░░    ▒▒▒▒▒▒▒▒            ▒▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░░░▒▒  ████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░▒▒▒▒▓▓░░░░▒▒░░  ████▓▓▓▓░░░░░░▒▒░░░░██▓▓▓▓▓▓\n" +
-//                "▒▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒░░    ░░▒▒░░░░▒▒░░          ░░░░▒▒▒▒▒▒▒▒▒▒░░░░▒▒░░██████████████████▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░░░    ░░      ░░▒▒▒▒  ▒▒▒▒  ▒▒████▓▓░░░░▒▒▒▒  ██▓▓▓▓▓▓▓▓\n" +
-//                "▒▒░░▒▒▒▒▒▒  ░░▒▒▒▒░░▒▒░░▒▒░░▒▒▒▒      ░░▒▒▒▒░░░░▒▒      ░░  ░░▒▒▒▒▒▒▒▒▒▒░░▒▒░░▒▒██████████▓▓▓▓▓▓▓▓▒▒▒▒░░            ░░░░    ░░    ░░      ░░▒▒░░░░▒▒░░  ████▓▓░░▒▒▒▒  ▒▒████▓▓▓▓▓▓\n" +
-//                "░░░░▒▒▒▒▒▒    ░░▒▒░░▒▒  ▒▒▒▒▒▒░░        ▒▒░░░░▒▒░░  ░░░░░░    ▒▒▒▒▒▒▒▒▒▒▒▒  ▓▓████████▓▓▓▓▒▒▒▒▒▒▒▒▒▒░░          ░░░░░░░░░░  ░░░░  ░░░░    ░░▒▒░░  ▒▒▒▒  ░░██▓▓▒▒▒▒░░░░██████▓▓▓▓▓▓\n" +
-//                "▒▒▒▒▒▒░░        ▒▒░░▓▓▒▒░░▒▒▒▒    ░░    ░░▓▓▒▒▒▒  ░░░░        ░░▒▒▒▒  ▒▒  ▓▓██████████▒▒░░▓▓▒▒░░░░▒▒  ░░      ░░  ░░░░▒▒▒▒░░░░░░      ░░    ░░░░░░░░▒▒▒▒  ▓▓██▓▓░░  ▓▓▓▓████▓▓▓▓▓▓\n" +
-//                "▒▒▒▒░░            ▒▒░░▒▒▒▒▒▒▒▒    ░░                        ░░▒▒░░░░▒▒░░▓▓▓▓████████▓▓    ░░░░▒▒▓▓░░░░░░        ░░▒▒▒▒░░░░▒▒░░  ░░    ░░    ░░░░░░  ░░▒▒░░  ██▓▓▒▒▒▒▓▓▓▓██████▓▓▒▒\n" +
-//                "▒▒▒▒░░░░░░░░        ▒▒▒▒▒▒▒▒▒▒░░                ░░  ░░░░░░░░▒▒▒▒▒▒░░▒▒▓▓██▓▓████████▒▒░░    ▒▒░░░░▒▒  ░░░░      ▒▒▒▒░░░░▒▒░░▒▒░░░░    ░░░░    ░░  ░░░░▒▒▒▒  ▒▒▓▓▓▓██▓▓▓▓██████▒▒▒▒\n" +
-//                "░░░░░░░░            ░░▒▒░░░░░░▒▒          ░░░░    ░░░░░░░░▒▒▒▒▒▒░░▒▒▓▓▓▓▓▓██████████▒▒░░░░░░░░▒▒  ▒▒░░          ░░▒▒░░▒▒░░░░░░░░  ░░  ░░      ░░░░▒▒▒▒▒▒▒▒░░  ▓▓██████▓▓▓▓████▓▓▒▒\n" +
-//                "░░  ░░    ░░░░  ░░░░  ░░▒▒▒▒▒▒▒▒░░      ░░  ░░  ░░    ░░░░▒▒▒▒░░▓▓▓▓██▓▓██▓▓▓▓██████░░░░░░░░  ░░▒▒▒▒▒▒░░░░░░    ░░░░▒▒▒▒▒▒░░▒▒░░    ░░  ░░░░  ▒▒▒▒░░░░▒▒▒▒▓▓  ░░████▓▓▓▓▓▓██▓▓▓▓▓▓\n" +
-//                "▒▒  ░░    ░░░░░░░░  ░░  ░░▒▒▒▒▒▒░░            ░░░░  ░░░░▒▒░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░████▓▓░░░░░░░░░░  ▒▒▒▒░░    ░░░░    ░░▒▒░░▒▒▒▒    ░░          ░░▒▒▒▒▒▒▒▒░░░░▒▒▒▒  ████████▓▓▒▒▓▓▓▓▓▓\n" +
-//                "░░    ░░      ░░  ░░▒▒░░  ▒▒▒▒▒▒░░        ░░░░    ░░▒▒▒▒░░░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒  ▓▓  ▓▓██▒▒  ▒▒░░  ░░░░▒▒░░░░    ░░      ░░░░  ░░        ░░░░░░░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒░░  ██████▒▒  ▓▓▓▓▓▓\n" +
-//                "▒▒░░  ░░    ░░  ░░░░░░▒▒    ▒▒▒▒░░▒▒░░░░░░░░░░  ░░▒▒▒▒░░▒▒▓▓▓▓██▓▓▓▓▓▓▒▒▒▒░░░░░░  ░░▒▒▒▒    ░░▒▒  ░░▒▒░░░░  ░░░░    ░░              ░░░░  ░░▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒████▒▒  ▒▒▓▓██\n" +
-//                "▒▒░░  ░░░░  ░░  ░░▒▒▒▒▒▒▒▒  ░░▒▒▒▒▒▒▒▒▒▒▒▒░░  ░░▒▒▒▒  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒░░▒▒▒▒░░  ░░░░░░  ▒▒▒▒  ▒▒▒▒░░░░  ░░░░    ░░                  ░░▒▒▒▒▒▒░░  ░░▒▒▒▒▒▒▒▒░░  ██▓▓▓▓░░  ▓▓██\n" +
-//                "▒▒░░    ░░  ░░    ░░▒▒▒▒▒▒▒▒  ░░▒▒▒▒▒▒░░▒▒▒▒░░▒▒▒▒  ▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░▒▒▒▒░░    ░░▒▒░░░░▒▒  ▒▒▒▒░░░░▒▒░░                              ░░░░▒▒▒▒    ▒▒▒▒▒▒░░▒▒▒▒░░  ░░▓▓▓▓▒▒  ▓▓▓▓\n" +
-//                "░░░░░░  ░░    ░░░░  ░░▒▒▒▒▒▒░░  ░░▒▒▒▒▒▒░░░░▒▒░░░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒    ░░░░░░    ░░▒▒▒▒░░  ▒▒▒▒  ▒▒▒▒░░  ▒▒▒▒░░░░  ░░                      ▓▓▓▓▒▒▒▒░░▒▒▒▒░░▒▒▒▒░░    ░░▓▓▓▓▓▓▓▓░░░░██\n" +
-//                "  ▒▒▒▒    ░░  ░░      ░░▒▒▒▒▒▒░░  ▒▒▒▒▒▒▒▒░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓░░  ░░  ░░  ░░▒▒▒▒▒▒▒▒▒▒░░░░▒▒░░  ▒▒▒▒░░  ░░▒▒▒▒░░                        ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░    ▓▓▓▓▓▓▓▓▓▓▓▓▒▒  ██\n" +
-//                "░░▒▒▒▒    ░░            ░░▒▒▒▒      ▒▒▒▒▒▒░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░        ░░▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒░░  ▒▒▒▒░░    ▒▒▒▒░░    ░░▒▒░░          ░░  ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░    ▒▒████▓▓▓▓▓▓▓▓▓▓▓▓░░░░\n" +
-//                "░░░░░░░░    ░░        ░░░░░░▒▒▒▒      ▒▒  ▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░  ░░▒▒▒▒▒▒░░░░░░░░░░    ▒▒▒▒░░░░  ▒▒▒▒░░  ░░  ▒▒▒▒░░    ░░            ▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒░░    ░░██████▓▓▓▓▓▓▓▓██▓▓▓▓░░  \n" +
-//                "▒▒  ▒▒░░              ░░▒▒    ▒▒▒▒    ░░██▓▓▓▓▓▓▓▓▓▓▒▒    ░░▒▒▒▒▒▒░░░░░░░░        ▒▒▒▒░░░░    ▒▒▒▒░░  ░░  ░░▒▒░░      ░░░░      ░░▒▒▒▒▒▒░░░░░░▒▒      ██████████▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒  \n" +
-//                "░░░░░░░░          ░░  ▒▒░░▒▒░░  ▒▒  ░░▒▒▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░▒▒░░░░        ░░░░  ░░▒▒░░        ▒▒▒▒░░  ░░    ▒▒▒▒▒▒░░▒▒░░▒▒▒▒░░▒▒▒▒▒▒▒▒░░▒▒▒▒░░    ▒▒████████▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒░░\n" +
-//                "▒▒░░░░▒▒░░░░░░░░░░▒▒░░▒▒▒▒░░░░░░    ▒▒░░▒▒▓▓▓▓▒▒░░▒▒░░░░▒▒▒▒░░        ░░░░░░    ▒▒▒▒░░░░  ░░  ▓▓▒▒    ░░    ░░▒▒▒▒░░▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░    ░░▓▓▓▓████████▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░  ░░\n" +
-//                "░░▒▒░░░░░░  ▒▒▒▒▓▓░░░░▒▒░░▒▒▒▒▒▒░░  ▒▒▒▒▒▒░░▓▓░░  ▒▒▒▒▒▒  ▒▒░░░░░░░░          ▒▒▒▒░░░░  ░░░░  ▒▒▒▒            ▒▒░░▒▒▒▒  ░░▒▒░░▒▒▒▒▒▒▒▒      ▓▓▓▓▓▓▓▓████████▓▓▓▓▒▒▒▒▒▒░░    ▒▒▓▓▓▓\n" +
-//                "  ░░░░░░░░  ▒▒▒▒▓▓  ▒▒▒▒▒▒▒▒▒▒▒▒░░  ▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒░░▒▒▒▒░░  ▒▒        ░░▒▒░░          ░░▒▒▒▒    ░░░░    ░░░░▒▒░░▒▒▒▒░░▒▒▒▒▒▒░░    ▒▒▓▓▓▓██▓▓▓▓████████▓▓▒▒▒▒░░    ▒▒▓▓▓▓▓▓▓▓\n" +
-//                "  ░░░░░░▒▒░░░░▒▒░░░░░░░░▒▒    ░░░░░░▒▒▒▒▒▒▒▒░░░░    ▒▒▒▒▒▒░░▒▒░░            ▒▒░░░░    ░░    ░░▒▒░░    ░░░░      ░░▒▒▒▒▒▒▒▒▒▒▒▒░░    ░░▓▓▓▓████▓▓▓▓▓▓████████▒▒░░  ░░▓▓████████████\n" +
-//                "░░░░░░  ░░░░░░▓▓  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ░░░░▒▒░░▒▒▒▒░░░░  ▒▒▓▓▒▒▒▒░░            ▒▒▒▒░░    ░░        ▒▒░░  ░░            ▒▒░░░░▒▒▒▒░░    ▓▓▓▓▓▓▓▓▓▓▓▓██▓▓██████▓▓▓▓░░▒▒██████████████████\n" +
-//                "░░░░░░░░▒▒░░  ▓▓  ░░▒▒▒▒▒▒░░░░▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒▒░░  ░░▒▒▒▒▒▒░░          ░░░░░░▒▒░░  ░░░░    ░░▒▒░░░░░░▒▒░░        ░░▒▒▒▒░░    ▒▒▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓██▓▓▓▓▓▓████████████████████████\n" +
-//                "▒▒  ░░░░▒▒▒▒░░░░░░      ░░▒▒▒▒░░  ▒▒▒▒▒▒  ▒▒░░▒▒░░    ▒▒▒▒▒▒░░        ░░░░▒▒▒▒▒▒▒▒░░        ░░░░▒▒▒▒▒▒▒▒░░░░        ░░    ░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░▒▒▓▓██████████████████▓▓▓▓▓▓▓▓▓▓\n" +
-//                "    ▒▒░░░░▒▒░░░░▓▓▒▒░░▒▒░░    ░░  ▒▒▒▒▒▒  ▒▒░░▒▒░░░░  ░░▒▒▒▒▒▒░░      ▒▒░░▒▒  ▒▒▒▒▒▒    ░░  ░░░░▒▒      ▒▒░░░░░░▒▒▒▒    ▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▒▒  ▓▓████████████████▓▓▓▓▒▒  ▒▒▓▓▓▓\n" +
-//                "▓▓░░░░▒▒  ▒▒▒▒  ▒▒▒▒▓▓▓▓▓▓██▒▒░░  ▒▒▒▒▒▒░░▒▒▒▒▒▒░░░░  ░░▒▒▒▒▒▒▒▒▒▒  ░░▓▓░░▒▒▒▒░░▒▒░░        ░░░░▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓▒▒▒▒  ▓▓██████████████▒▒░░░░░░  ▓▓▓▓▓▓\n" +
-//                "████  ░░░░░░▒▒░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓  ░░▒▒░░▒▒▓▓▒▒░░▒▒▒▒  ▒▒  ▒▒▒▒▒▒▒▒░░    ▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒  ▓▓████████████▓▓░░▒▒░░  ▓▓▓▓▓▓▓▓\n" +
-//                "▓▓▓▓  ▒▒░░░░░░  ░░░░░░░░        ░░▒▒▒▒▒▒▒▒░░▒▒▒▒░░  ░░  ░░▒▒░░▒▒░░░░    ░░▒▒▒▒▒▒░░▒▒▒▒░░░░  ░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▓▓▓▓▓▓▓▓▒▒▒▒░░▒▒▒▒▒▒  ██████████▓▓▓▓▒▒░░    ░░▓▓▓▓▓▓▓▓\n" +
-//                "▒▒▒▒░░░░▒▒  ▒▒░░                  ░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░  ▒▒▒▒░░▒▒▒▒░░      ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒        ░░░░░░░░  ░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▓▓▓▓▓▓██████▓▓▒▒▒▒░░  ▓▓▓▓▓▓▓▓▓▓\n" +
-//                "▒▒▒▒▒▒  ░░░░▒▒░░                              ░░░░▒▒▒▒▒▒  ░░░░▒▒▒▒▒▒▒▒░░░░    ░░▒▒▒▒░░▒▒▓▓░░    ░░    ░░                                          ▓▓▓▓▓▓██████▓▓▓▓▒▒  ▒▒▓▓▓▓▓▓▓▓▓▓\n" +
-//                "░░░░▒▒  ░░░░░░░░░░░░░░                ▒▒▓▓▓▓▒▒░░░░          ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒    ░░▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▓▓▓▓██▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓████████████▓▓▓▓▒▒▓▓▓▓██▓▓▓▓████▓▓▓▓▒▒░░░░▓▓▓▓▓▓▓▓▓▓▓▓\n" +
-//                "▒▒▒▒░░░░░░▒▒  ░░░░░░░░                ▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒  ▒▒░░▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒    ░░▒▒▒▒░░░░▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▓▓▓▓▓▓▓▓██████████████▓▓▓▓██▓▓▓▓▓▓██████▓▓▓▓▒▒  ▓▓▓▓▓▓▓▓▓▓▓▓▒▒\n" +
-//                "▒▒░░░░▒▒  ░░  ░░░░  ░░      ░░▒▒▓▓▓▓░░░░░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓  ░░▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒░░░░    ░░▒▒░░▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████▓▓▓▓  ░░██▓▓▓▓▓▓▓▓▓▓▒▒\n" +
-//                "░░▒▒░░░░  ░░░░░░░░░░░░░░    ▒▒▒▒  ░░▒▒░░░░░░  ▒▒▒▒▒▒▒▒▒▒▓▓▒▒  ▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒░░░░░░    ▒▒▒▒▒▒▒▒▒▒░░  ░░▒▒▒▒▒▒▒▒▒▒▒▒░░████████▓▓▓▓▓▓▒▒▒▒░░▒▒▓▓▒▒▒▒▒▒████████▒▒  ▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░\n" +
-//                "▒▒░░░░░░░░░░▒▒  ░░░░░░░░  ░░▒▒░░░░▒▒▒▒░░░░░░  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ░░▒▒▒▒▒▒  ▒▒▒▒░░▒▒░░░░▒▒▒▒░░  ░░▒▒▒▒░░▒▒▒▒    ▒▒▒▒▒▒▒▒  ▒▒██▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ░░▓▓▓▓▓▓▓▓░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░  \n" +
-//                "░░▒▒░░░░░░░░░░░░░░░░  ░░    ▒▒░░░░░░▒▒░░░░    ░░▒▒▒▒▒▒▒▒░░      ▒▒░░▒▒  ▒▒░░▒▒▒▒▒▒▒▒▒▒░░░░      ▒▒▒▒░░▒▒▒▒░░▒▒▒▒▒▒░░  ██▓▓██▓▓▓▓▓▓▓▓▒▒▒▒░░▒▒▒▒▒▒▒▒  ░░██▓▓██▓▓░░▓▓▓▓▓▓▓▓▓▓▓▓░░░░▓▓");
-        System.out.println();
-        System.out.println("Welcome to the " + GREEN + "A" + RESET + "utomated " + GREEN + "T" + RESET + "eller " + GREEN +"M" + RESET + "achine");
+        System.out.println(ANSI_GREEN + "__$$$___ $$$$$$_ $$___$$_\n" +
+                "_$$_$$__ __$$___ $$$_$$$_\n" +
+                "$$___$$_ __$$___ $$$$$$$_\n" +
+                "$$$$$$$_ __$$___ $$_$_$$_\n" +
+                "$$___$$_ __$$___ $$___$$_\n" +
+                "$$___$$_ __$$___ $$___$$_" + ANSI_RESET);
+        System.out.println("Welcome to the " + ANSI_GREEN + "A" + ANSI_RESET + "utomated " + ANSI_GREEN + "T" + ANSI_RESET + "eller " + ANSI_GREEN +"M" + ANSI_RESET + "achine");
 
-        System.out.print(WHITE_BACK + "Loading" + RESET);
-        System.out.print(WHITE_BACK + "." + RESET);
-        System.out.print(WHITE_BACK + "." + RESET);
-        System.out.println(WHITE_BACK + "." + RESET);
+        System.out.print(ANSI_WHITE_BACK + "Loading" + ANSI_RESET);
+        System.out.print(ANSI_WHITE_BACK + "." + ANSI_RESET);
+        System.out.print(ANSI_WHITE_BACK + "." + ANSI_RESET);
+        System.out.println(ANSI_WHITE_BACK + "." + ANSI_RESET);
 
         // Create account screen
-        System.out.println(GREEN + "Create An Account" + RESET);
+        System.out.println(ANSI_GREEN + "Create An Account" + ANSI_RESET);
         System.out.println("Enter your name: ");
         String name = scan.nextLine();
         System.out.println("Create a 4 digit PIN: ");
@@ -108,19 +50,19 @@ public class ATM {
         savings = new Account("Savings Account", customer);
         checking = new Account("Checking Account", customer);
 
-        System.out.println(GREEN_BACK + "Account created!" + RESET);
+        System.out.println(ANSI_GREEN_BACK + "Account created!" + ANSI_RESET);
 
-        System.out.print(WHITE_BACK + "Loading");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.println(WHITE_BACK + ". " + RESET);
+        System.out.print(ANSI_WHITE_BACK + "Loading");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.println(ANSI_WHITE_BACK + ". " + ANSI_RESET);
 
     }
     private boolean atm(){
         //Tracker varaible
         boolean choice = true;
         //PIN input
-        System.out.println(GREEN + "Sign in" + RESET);
+        System.out.println(ANSI_GREEN + "Sign in" + ANSI_RESET);
         boolean incorrect = true;
         while (incorrect) {
             System.out.println("Please enter your 4 digit PIN: ");
@@ -131,13 +73,13 @@ public class ATM {
             }else {
                 System.out.println("Your PIN is incorrect, Please try again.");
 
-                System.out.println(GREEN + "Sign in" + RESET);
+                System.out.println(ANSI_GREEN + "Sign in" + ANSI_RESET);
             }
         }
 
 
         //Main Menu
-        System.out.println("Welcome " + GREEN + customer.getName() + RESET +  "!");
+        System.out.println("Welcome " + ANSI_GREEN + customer.getName() + ANSI_RESET +  "!");
         System.out.println();
         System.out.println("Main Menu");
         System.out.println("Please make a selection: ");
@@ -155,8 +97,8 @@ public class ATM {
 
 
             if (selection > 6 || selection < 1){
-                System.out.println(RED + "Invalid input" + RESET + "; Please make a valid selection");
-                System.out.println("Welcome " + GREEN + customer.getName() + RESET +  "!");
+                System.out.println(ANSI_RED + "Invalid input" + ANSI_RESET + "; Please make a valid selection");
+                System.out.println("Welcome " + ANSI_GREEN + customer.getName() + ANSI_RESET +  "!");
                 System.out.println();
                 System.out.println("Main Menu");
                 System.out.println("Please make a selection: ");
@@ -183,12 +125,12 @@ public class ATM {
     }
 
     private void withdraw(){
-        System.out.print(WHITE_BACK + "Loading");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.println(WHITE_BACK + "." + RESET);
+        System.out.print(ANSI_WHITE_BACK + "Loading");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.println(ANSI_WHITE_BACK + "." + ANSI_RESET);
 
-        System.out.println(GREEN + "Withdraw Money" + RESET);
+        System.out.println(ANSI_GREEN + "Withdraw Money" + ANSI_RESET);
         System.out.println();
 
         //Choosing account
@@ -197,11 +139,11 @@ public class ATM {
         scan.nextLine();
 
         if (account == 1){
-            System.out.println(GREEN + savings.getName() + RESET);
+            System.out.println(ANSI_GREEN + savings.getName() + ANSI_RESET);
         }else {
-            System.out.println(GREEN + checking.getName() + RESET);
+            System.out.println(ANSI_GREEN + checking.getName() + ANSI_RESET);
         }
-        System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
+        System.out.println(ANSI_RED + "Machine can only dispense $20 and $5 bills" + ANSI_RESET);
 
         //Checking for valid input
         boolean validInput = false;
@@ -213,37 +155,37 @@ public class ATM {
             if (amount % 5 != 0 && amount != 0){
                 System.out.println("Sorry :(, machine cannot dispense that amount; Please enter a valid amount");
 
-                System.out.println(GREEN + "Withdraw Money" + RESET);
+                System.out.println(ANSI_GREEN + "Withdraw Money" + ANSI_RESET);
                 System.out.println();
-                System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
+                System.out.println(ANSI_RED + "Machine can only dispense $20 and $5 bills" + ANSI_RESET);
             }else {
                 if (account == 1){
                     if (savings.getBalance() < amount){
-                        System.out.println(RED + "Insufficient funds" + RESET + "; Please choose a smaller amount");
+                        System.out.println(ANSI_RED + "Insufficient funds" + ANSI_RESET + "; Please choose a smaller amount");
 
-                        System.out.print(GREEN + "Withdraw Money :" + RESET);
+                        System.out.print(ANSI_GREEN + "Withdraw Money :" + ANSI_RESET);
                         if (account == 1){
-                            System.out.println(GREEN + savings.getName() + RESET);
+                            System.out.println(ANSI_GREEN + savings.getName() + ANSI_RESET);
                         }else {
-                            System.out.println(GREEN + checking.getName() + RESET);
+                            System.out.println(ANSI_GREEN + checking.getName() + ANSI_RESET);
                         }
                         System.out.println();
-                        System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
+                        System.out.println(ANSI_RED + "Machine can only dispense $20 and $5 bills" + ANSI_RESET);
                     }else {
                         validInput = true;
                     }
                 }else {
                     if (checking.getBalance() < amount) {
-                        System.out.println(RED + "Insufficient funds" + RESET + "; Please choose a smaller amount" + RESET);
+                        System.out.println(ANSI_RED + "Insufficient funds" + ANSI_RESET + "; Please choose a smaller amount" + ANSI_RESET);
 
-                        System.out.println(GREEN + "Withdraw Money" + RESET);
+                        System.out.println(ANSI_GREEN + "Withdraw Money" + ANSI_RESET);
                         System.out.println();
                         if (account == 1){
-                            System.out.println(GREEN + savings.getName() + RESET);
+                            System.out.println(ANSI_GREEN + savings.getName() + ANSI_RESET);
                         }else {
-                            System.out.println(GREEN + checking.getName() + RESET);
+                            System.out.println(ANSI_GREEN + checking.getName() + ANSI_RESET);
                         }
-                        System.out.println(RED + "Machine can only dispense $20 and $5 bills" + RESET);
+                        System.out.println(ANSI_RED + "Machine can only dispense $20 and $5 bills" + ANSI_RESET);
                     }else {
                         validInput = true;
                     }
@@ -265,7 +207,7 @@ public class ATM {
 
         //Checking if selection adds up
         while (!validInput) {
-            System.out.println("Max $20 bills: " + RED + max[0] + RESET + "\nMax $5 bills: " + RED + max[1]);
+            System.out.println("Max $20 bills: " + ANSI_RED + max[0] + ANSI_RESET + "\nMax $5 bills: " + ANSI_RED + max[1]);
             System.out.println("How many $20 bills do you want?");
             int twentys = scan.nextInt();
             scan.nextLine();
@@ -278,48 +220,48 @@ public class ATM {
                 validInput = true;
             } else {
                 if (total != amount) {
-                    System.out.println(RED + "Invalid input" + RESET + ";Please enter an amount of bills that adds up to withdraw amount");
+                    System.out.println(ANSI_RED + "Invalid input" + ANSI_RESET + ";Please enter an amount of bills that adds up to withdraw amount");
                 }
 //                }else if (twentys > max[0] || fives > max[1]){
-//                    System.out.println(RED + "Invalid input" + RESET + ";Please enter an amount of bills less than or equal to the maximum amount of bills");
+//                    System.out.println(ANSI_RED + "Invalid input" + ANSI_RESET + ";Please enter an amount of bills less than or equal to the maximum amount of bills");
 //                }
 
             }
         }
-            System.out.print(WHITE_BACK + "Dispensing cash");
-            System.out.print(WHITE_BACK + ". ");
-            System.out.print(WHITE_BACK + ". ");
-            System.out.println(WHITE_BACK + "." + RESET);
+            System.out.print(ANSI_WHITE_BACK + "Dispensing cash");
+            System.out.print(ANSI_WHITE_BACK + ". ");
+            System.out.print(ANSI_WHITE_BACK + ". ");
+            System.out.println(ANSI_WHITE_BACK + "." + ANSI_RESET);
 
 
             //Receipt
-            System.out.println("-----------------------------" + RESET);
-            System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
-            System.out.println(WHITE_BACK + "Withdraw");
-            System.out.print(WHITE_BACK + "From: ");
+            System.out.println("-----------------------------" + ANSI_RESET);
+            System.out.println(ANSI_WHITE_BACK + "Transaction #" + getTransactionID());
+            System.out.println(ANSI_WHITE_BACK + "Withdraw");
+            System.out.print(ANSI_WHITE_BACK + "From: ");
             if (account == 1){
                 System.out.print("Savings");
             }else {
                 System.out.print("Checking");
             }
             System.out.println();
-            System.out.println(WHITE_BACK + "Amount: $" + amount);
-            System.out.println(WHITE_BACK + "Transaction was successful");
-            System.out.println(WHITE_BACK + "-----------------------------");
-            System.out.println(WHITE_BACK + "Current Balances");
-            System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-            System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
-            System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
+            System.out.println(ANSI_WHITE_BACK + "Amount: $" + amount);
+            System.out.println(ANSI_WHITE_BACK + "Transaction was successful");
+            System.out.println(ANSI_WHITE_BACK + "-----------------------------");
+            System.out.println(ANSI_WHITE_BACK + "Current Balances");
+            System.out.println(ANSI_WHITE_BACK + "Savings: $" + savings.getBalance());
+            System.out.println(ANSI_WHITE_BACK + "Checking: $" + checking.getBalance() + ANSI_RESET);
+            System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + ANSI_RESET);
 
     }
 
     private void deposit(){
-        System.out.print(WHITE_BACK + "Loading");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.println(WHITE_BACK + ". " + RESET);
+        System.out.print(ANSI_WHITE_BACK + "Loading");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.println(ANSI_WHITE_BACK + ". " + ANSI_RESET);
 
-        System.out.println(GREEN + "Deposit Money" + RESET);
+        System.out.println(ANSI_GREEN + "Deposit Money" + ANSI_RESET);
         System.out.println();
 
         //Choosing account
@@ -342,32 +284,32 @@ public class ATM {
         }
 
         //Receipt
-        System.out.println("-----------------------------" + RESET);
-        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
-        System.out.println(WHITE_BACK + "Deposit");
-        System.out.print(WHITE_BACK + "From: ");
+        System.out.println("-----------------------------" + ANSI_RESET);
+        System.out.println(ANSI_WHITE_BACK + "Transaction #" + getTransactionID());
+        System.out.println(ANSI_WHITE_BACK + "Deposit");
+        System.out.print(ANSI_WHITE_BACK + "From: ");
         if (account == 1){
             System.out.print("Savings");
         }else {
             System.out.print("Checking");
         }
         System.out.println();
-        System.out.println(WHITE_BACK + "Amount: $" + amount);
-        System.out.println(WHITE_BACK + "Transaction was successful");
-        System.out.println(WHITE_BACK + "-----------------------------");
-        System.out.println(WHITE_BACK + "Current Balances");
-        System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
-        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
+        System.out.println(ANSI_WHITE_BACK + "Amount: $" + amount);
+        System.out.println(ANSI_WHITE_BACK + "Transaction was successful");
+        System.out.println(ANSI_WHITE_BACK + "-----------------------------");
+        System.out.println(ANSI_WHITE_BACK + "Current Balances");
+        System.out.println(ANSI_WHITE_BACK + "Savings: $" + savings.getBalance());
+        System.out.println(ANSI_WHITE_BACK + "Checking: $" + checking.getBalance() + ANSI_RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + ANSI_RESET);
     }
 
     private void transfer(){
-        System.out.print(WHITE_BACK + "Loading");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.println(WHITE_BACK + ". " + RESET);
+        System.out.print(ANSI_WHITE_BACK + "Loading");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.println(ANSI_WHITE_BACK + ". " + ANSI_RESET);
 
-        System.out.println(GREEN + "Transfer Money" + RESET);
+        System.out.println(ANSI_GREEN + "Transfer Money" + ANSI_RESET);
         System.out.println();
 
         //Choosing accounts
@@ -388,18 +330,18 @@ public class ATM {
                 if (savings.getBalance() >= amount){
                     validInput = true;
                 }else {
-                    System.out.println(RED + "Insufficient funds for transfer" + RESET + "; Please enter an amount less than or equal to your accounts balance");
+                    System.out.println(ANSI_RED + "Insufficient funds for transfer" + ANSI_RESET + "; Please enter an amount less than or equal to your accounts balance");
 
-                    System.out.println(GREEN + "Transfer Money" + RESET);
+                    System.out.println(ANSI_GREEN + "Transfer Money" + ANSI_RESET);
                     System.out.println();
                 }
             }else{
                 if (checking.getBalance() >= amount){
                     validInput = true;
                 }else {
-                    System.out.println(RED + "Insufficient funds for transfer" + RESET + "; Please enter an amount less than or equal to your accounts balance");
+                    System.out.println(ANSI_RED + "Insufficient funds for transfer" + ANSI_RESET + "; Please enter an amount less than or equal to your accounts balance");
 
-                    System.out.println(GREEN + "Transfer Money" + RESET);
+                    System.out.println(ANSI_GREEN + "Transfer Money" + ANSI_RESET);
                     System.out.println();
                 }
             }
@@ -415,74 +357,74 @@ public class ATM {
         }
 
         // Receipt
-        System.out.println("-----------------------------" + RESET);
-        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
-        System.out.println(WHITE_BACK + "Transfer");
-        System.out.print(WHITE_BACK + "From: ");
+        System.out.println("-----------------------------" + ANSI_RESET);
+        System.out.println(ANSI_WHITE_BACK + "Transaction #" + getTransactionID());
+        System.out.println(ANSI_WHITE_BACK + "Transfer");
+        System.out.print(ANSI_WHITE_BACK + "From: ");
         if (account == 1){
             System.out.print("Savings");
         }else {
             System.out.print("Checking");
         }
         System.out.println();
-        System.out.print(WHITE_BACK + "To: ");
+        System.out.print(ANSI_WHITE_BACK + "To: ");
         if (account == 1){
             System.out.print("Checking");
         }else {
             System.out.print("Savings");
         }
         System.out.println();
-        System.out.println(WHITE_BACK + "Amount: $" + amount);
-        System.out.println(WHITE_BACK + "Transaction was successful");
-        System.out.println(WHITE_BACK + "-----------------------------");
-        System.out.println(WHITE_BACK + "Current Balances");
-        System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
-        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
+        System.out.println(ANSI_WHITE_BACK + "Amount: $" + amount);
+        System.out.println(ANSI_WHITE_BACK + "Transaction was successful");
+        System.out.println(ANSI_WHITE_BACK + "-----------------------------");
+        System.out.println(ANSI_WHITE_BACK + "Current Balances");
+        System.out.println(ANSI_WHITE_BACK + "Savings: $" + savings.getBalance());
+        System.out.println(ANSI_WHITE_BACK + "Checking: $" + checking.getBalance() + ANSI_RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + ANSI_RESET);
     }
 
     private void getBalances(){
-        System.out.print(WHITE_BACK + "Loading");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.println(WHITE_BACK + ". " + RESET);
+        System.out.print(ANSI_WHITE_BACK + "Loading");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.println(ANSI_WHITE_BACK + ". " + ANSI_RESET);
 
 
         // Receipt
-        System.out.println("-----------------------------" + RESET);
-        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
-        System.out.println(WHITE_BACK + "Account Balances");
-        System.out.println(WHITE_BACK + "-----------------------------");
-        System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
-        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
+        System.out.println("-----------------------------" + ANSI_RESET);
+        System.out.println(ANSI_WHITE_BACK + "Transaction #" + getTransactionID());
+        System.out.println(ANSI_WHITE_BACK + "Account Balances");
+        System.out.println(ANSI_WHITE_BACK + "-----------------------------");
+        System.out.println(ANSI_WHITE_BACK + "Savings: $" + savings.getBalance());
+        System.out.println(ANSI_WHITE_BACK + "Checking: $" + checking.getBalance() + ANSI_RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + ANSI_RESET);
 
 
     }
 
     private void changePIN(){
-        System.out.print(WHITE_BACK + "Loading");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.println(WHITE_BACK + ". " + RESET);
+        System.out.print(ANSI_WHITE_BACK + "Loading");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.println(ANSI_WHITE_BACK + ". " + ANSI_RESET);
 
 
-        System.out.println(GREEN + "Change PIN" + RESET);
+        System.out.println(ANSI_GREEN + "Change PIN" + ANSI_RESET);
         System.out.println("Please enter a new 4 digit PIN");
         int newPIN = scan.nextInt();
         scan.nextLine();
         customer.setPIN(newPIN);
 
         // Receipt
-        System.out.println("-----------------------------" + RESET);
-        System.out.println(WHITE_BACK + "Transaction #" + getTransactionID());
-        System.out.println(WHITE_BACK + "Change PIN");
-        System.out.println(WHITE_BACK + "PIN successfully changed!");
-        System.out.println(WHITE_BACK + "-----------------------------");
-        System.out.println(WHITE_BACK + "Current Balances");
-        System.out.println(WHITE_BACK + "Savings: $" + savings.getBalance());
-        System.out.println(WHITE_BACK + "Checking: $" + checking.getBalance() + RESET);
-        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + RESET);
+        System.out.println("-----------------------------" + ANSI_RESET);
+        System.out.println(ANSI_WHITE_BACK + "Transaction #" + getTransactionID());
+        System.out.println(ANSI_WHITE_BACK + "Change PIN");
+        System.out.println(ANSI_WHITE_BACK + "PIN successfully changed!");
+        System.out.println(ANSI_WHITE_BACK + "-----------------------------");
+        System.out.println(ANSI_WHITE_BACK + "Current Balances");
+        System.out.println(ANSI_WHITE_BACK + "Savings: $" + savings.getBalance());
+        System.out.println(ANSI_WHITE_BACK + "Checking: $" + checking.getBalance() + ANSI_RESET);
+        System.out.println("⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄" + ANSI_RESET);
 
     }
 
@@ -527,10 +469,10 @@ public class ATM {
             }
         }
         System.out.println("Thanks for visiting!");
-        System.out.print(WHITE_BACK + "Signing out");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
-        System.out.print(WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + "Signing out");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
+        System.out.print(ANSI_WHITE_BACK + ". ");
 
     }
 
